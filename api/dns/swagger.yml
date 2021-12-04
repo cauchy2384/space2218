@@ -1,0 +1,98 @@
+basePath: /api/v1
+consumes:
+- application/json
+definitions:
+  CalculateLocationRequest:
+    properties:
+      vel:
+        description: Velocity
+        example: "20.0"
+        type: string
+        x-go-name: Velocity
+      x:
+        description: X coordinate
+        example: "123.12"
+        type: string
+        x-go-name: X
+      "y":
+        description: Y coordinate
+        example: "456.56"
+        type: string
+        x-go-name: "Y"
+      z:
+        description: Z coordinate
+        example: "789.89"
+        type: string
+        x-go-name: Z
+    required:
+    - x
+    - "y"
+    - z
+    - vel
+    type: object
+    x-go-package: space2218/internal/dns/ports/http
+  CalculateLocationResponse:
+    properties:
+      loc:
+        description: Location
+        example: 1389.57
+        format: double
+        type: number
+        x-go-name: Location
+    type: object
+    x-go-package: space2218/internal/dns/ports/http
+host: localhost
+info:
+  contact:
+    email: cauchy.code@yandex.com
+    name: Valentin Loginov
+  license:
+    name: MIT
+    url: http://opensource.org/licenses/MIT
+  title: Drone navigation service.
+  version: 0.0.1
+paths:
+  /live:
+    get:
+      description: Liveness probe
+      operationId: liveness
+      responses:
+        "200":
+          description: ""
+      tags:
+      - healthcheck
+  /location:
+    post:
+      description: Calculate location by given coordinates and velocity
+      operationId: location
+      parameters:
+      - description: Request
+        in: body
+        name: Request
+        schema:
+          $ref: '#/definitions/CalculateLocationRequest'
+      responses:
+        "200":
+          $ref: '#/responses/locationResponse'
+      tags:
+      - api
+  /ready:
+    get:
+      description: Readiness probe
+      operationId: readiness
+      responses:
+        "200":
+          description: ""
+      tags:
+      - healthcheck
+produces:
+- application/json
+responses:
+  locationResponse:
+    description: Location response
+    schema:
+      $ref: '#/definitions/CalculateLocationResponse'
+schemes:
+- http
+- https
+swagger: "2.0"

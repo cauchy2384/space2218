@@ -1,0 +1,32 @@
+###
+# Liveness
+GET http://localhost:1337/live
+
+###
+# Readiness
+GET http://localhost:1337/ready 
+
+
+###
+# Location
+POST http://localhost:1337/api/v1/location
+content-type: application/json
+
+{
+    "x": "123.12",
+    "y": "456.56",
+    "z": "789.89",
+    "vel": "20.0"
+}
+
+###
+# Location bad input
+POST http://localhost:1337/api/v1/location
+content-type: application/json
+
+{
+    "x": "NASA",
+    "y": "456.56",
+    "z": "789.89",
+    "vel": "20.0"
+}

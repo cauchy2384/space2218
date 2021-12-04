@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  dns:
+    image: cauchy2384/space2218:latest
+    env_file:
+      - ./dns.env
+    ports:
+      - "1337:8080"
+    working_dir: /app
+    command: /app/dns
+    restart: on-failure  

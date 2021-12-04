@@ -1,0 +1,111 @@
+# This file contains all available configuration options
+# with their default values.
+
+# options for analysis running
+run:
+  # by default isn't set. If set we pass it to "go list -mod={option}". From "go help modules":
+  # If invoked with -mod=readonly, the go command is disallowed from the implicit
+  # automatic updating of go.mod described above. Instead, it fails when any changes
+  # to go.mod are needed. This setting is most useful to check that go.mod does
+  # not need updates, such as in a continuous integration and testing system.
+  # If invoked with -mod=vendor, the go command assumes that the vendor
+  # directory holds the correct copies of dependencies and ignores
+  # the dependency descriptions in go.mod.
+  modules-download-mode: readonly
+
+  # default concurrency is a available CPU number
+  # concurrency: 8
+
+  # timeout for analysis, e.g. 30s, 5m, default is 1m
+  deadline: 10m
+
+  # include test files or not, default is true
+  tests: false
+
+linters:
+  ## list https://golangci-lint.run/usage/linters/
+  enable:
+    ## enabled by default
+    - deadcode
+    - errcheck
+    - gosimple
+    - govet
+    - ineffassign
+    - staticcheck
+    - structcheck
+    - typecheck
+    - unused
+    - varcheck
+    ## disabled by default
+    - asciicheck
+    - bodyclose
+    - cyclop
+    - depguard
+    - dogsled
+    - dupl
+    - durationcheck
+    # - errorlint // can't wrap twice with %s, to many falses
+    # - exhaustive // default branch is okay for switch-case
+    # - exhaustivestruct // too many generated code properties
+    - exportloopref
+    - forbidigo
+    - forcetypeassert
+    - funlen
+    # - gci // goimports is enough
+    - gochecknoglobals
+    - gochecknoinits
+    - gocognit
+    - goconst
+    - gocritic
+    - gocyclo
+    - godot
+    - godox
+    - goerr113
+    # - gofmt // is covered by goimports
+    # - gofumpt // have no idea how to set it in vscode properly
+    - goheader
+    - goimports
+    # - golint // deprecated
+    - gomnd
+    # - gomoddirectives // we do use so replaces
+    # - gomodguard // no need
+    - goprintffuncname
+    - gosec
+    - ifshort
+    - importas
+    - lll
+    - makezero
+    - misspell
+    - nakedret
+    - nestif
+    - nilerr
+    # - nlreturn
+    - noctx
+    - nolintlint
+    - paralleltest
+    - prealloc
+    - predeclared
+    # - promlint
+    - revive
+    - rowserrcheck
+    - sqlclosecheck
+    # - stylecheck // golint is ok
+    - tagliatelle
+    # - testpackage // no thx
+    - thelper
+    - tparallel
+    - unconvert
+    - unparam
+    - wastedassign
+    # - whitespace
+    # - wrapcheck // many false positives
+    # - wsl // no thx
+  disable-all: true
+  fast: false
+
+linters-settings:
+  lll:
+    line-length: 120
+
+max-issues-per-linter: 0
+max-same-issues: 0
